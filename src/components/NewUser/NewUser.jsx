@@ -1,4 +1,4 @@
-import { AddUserForm } from 'components/AddUserForm/AddUserForm';
+import { AddUserForm } from 'components/NewUser/AddUserForm/AddUserForm';
 import { NewUserWrapper } from './NewUser.styled';
 
 export const NewUser = () => {
