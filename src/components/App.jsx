@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { NewUser } from './NewUser/NewUser';
 import { Users } from './Users/Users';
 
@@ -8,10 +9,16 @@ const USERS_LIST = [
 ];
 
 export const App = () => {
+  const [listUsers, setListUsers] = useState(USERS_LIST);
+
+  const addUserHandler = user => {
+    setListUsers(prevUsers => [user, ...prevUsers]);
+  };
+
   return (
     <>
-      <NewUser />
-      <Users users={USERS_LIST} />
+      <NewUser onAddUser={addUserHandler} />
+      <Users users={listUsers} />
     </>
   );
 };

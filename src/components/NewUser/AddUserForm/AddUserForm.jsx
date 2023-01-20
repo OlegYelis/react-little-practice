@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { ControlsWrapper, Controls, Button } from './AddUserForm.styled';
 
-export const AddUserForm = () => {
+export const AddUserForm = ({ onAddUser }) => {
   const [inputName, setInputName] = useState('');
   const [inputAge, setInputAge] = useState('');
 
   const submitFormHandler = evt => {
     evt.preventDefault();
+
+    const newUser = { name: inputName, age: inputAge };
+
+    onAddUser(newUser);
+    setInputName('');
+    setInputAge('');
   };
 
   const nameChangeHandler = evt => {
