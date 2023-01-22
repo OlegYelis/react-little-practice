@@ -8,10 +8,8 @@ export const AddUserForm = ({ onAddUser, onCheckFields, onCheckAge }) => {
   const submitFormHandler = evt => {
     evt.preventDefault();
 
-    const newUser = { name: inputName, age: inputAge };
-
     if (inputName.trim().length === 0 || inputAge.trim().length === 0) {
-      onCheckFields(true);
+      onCheckFields();
       return;
     }
 
@@ -20,7 +18,7 @@ export const AddUserForm = ({ onAddUser, onCheckFields, onCheckAge }) => {
       return;
     }
 
-    onAddUser(newUser);
+    onAddUser(inputName, inputAge);
     setInputName('');
     setInputAge('');
   };

@@ -6,7 +6,7 @@ import {
   Button,
 } from './InfoModal.styled';
 
-export const InfoModal = ({ title, text, onClose }) => {
+export const InfoModal = ({ title, message, onClose }) => {
   const closeModalHandler = evt => {
     if (evt.target.nodeName !== 'BUTTON' && evt.target.id !== 'backdrop') {
       return;
@@ -19,7 +19,7 @@ export const InfoModal = ({ title, text, onClose }) => {
     <Backdrop onClick={closeModalHandler} id="backdrop">
       <ModalWrapper>
         <ModalTitle>{title}</ModalTitle>
-        <ModalTxt>{text}</ModalTxt>
+        <ModalTxt>{message}</ModalTxt>
         <Button type="button">Close</Button>
       </ModalWrapper>
     </Backdrop>

@@ -13,9 +13,8 @@ export const Controls = styled.label`
 
   label {
     font-weight: bold;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.7rem;
     display: block;
-    // color: ${props => (props.invalid ? 'red' : 'inherit')};
   }
 
   input {
@@ -26,7 +25,6 @@ export const Controls = styled.label`
     border: 1px solid #ccc;
     width: 22rem;
     max-width: 100%;
-    // outline: ${props => (props.invalid ? '1px solid red' : 'inherit')};
 `;
 
 export const Button = styled.button`

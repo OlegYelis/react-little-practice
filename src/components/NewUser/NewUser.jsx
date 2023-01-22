@@ -4,20 +4,20 @@ import { useState } from 'react';
 import { NewUserWrapper } from './NewUser.styled';
 
 export const NewUser = ({ onAddUser }) => {
-  const [isOpen, setIsOpen] = useState(true);
-  const [modalTxt, setModalTxt] = useState('');
-  const [modalTitle, setModalTitle] = useState('');
+  const [error, setError] = useState();
 
   const onCheckAge = () => {
-    setModalTxt('Age must be greater than 0');
-    setModalTitle('Incorrect age');
-    setIsOpen(true);
+    setError({
+      title: 'Incorrect age',
+      message: 'Age must be greater than 0',
+    });
   };
 
   const onCheckFields = () => {
-    setModalTxt('Please fill in all fields');
-    setModalTitle('Incorrect input');
-    setIsOpen(true);
+    setError({
+      title: 'Incorrect input',
+      message: 'Please fill in all fields',
+    });
   };
 
   return (
@@ -27,11 +27,11 @@ export const NewUser = ({ onAddUser }) => {
         onCheckFields={onCheckFields}
         onCheckAge={onCheckAge}
       ></AddUserForm>
-      {isOpen && (
+      {error && (
         <InfoModal
-          title={modalTitle}
-          text={modalTxt}
-          onClose={setIsOpen}
+          title={error.title}
+          message={error.message}
+          onClose={setError}
         ></InfoModal>
       )}
     </NewUserWrapper>
