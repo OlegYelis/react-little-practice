@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const Backdrop = styled.div`
+export const BackdropWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;

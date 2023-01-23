@@ -20,6 +20,10 @@ export const NewUser = ({ onAddUser }) => {
     });
   };
 
+  const closeModalHandler = () => {
+    setError(false);
+  };
+
   return (
     <NewUserWrapper>
       <AddUserForm
@@ -27,11 +31,12 @@ export const NewUser = ({ onAddUser }) => {
         onCheckFields={onCheckFields}
         onCheckAge={onCheckAge}
       ></AddUserForm>
+
       {error && (
         <InfoModal
           title={error.title}
           message={error.message}
-          onClose={setError}
+          onClose={closeModalHandler}
         ></InfoModal>
       )}
     </NewUserWrapper>

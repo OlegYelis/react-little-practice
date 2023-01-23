@@ -1,27 +1,39 @@
 import {
-  Backdrop,
+  BackdropWrapper,
   ModalTitle,
   ModalTxt,
   ModalWrapper,
   Button,
 } from './InfoModal.styled';
+import ReactDOM from 'react-dom';
+
+const Backdrop = ({ onClose }) => {
+  return <BackdropWrapper onClick={onClose} id="backdrop"></BackdropWrapper>;
+};
+
+const Modal = ({ title, message, onClose }) => {
+  return (
+    <ModalWrapper>
+      <ModalTitle>{title}</ModalTitle>
+      <ModalTxt>{message}</ModalTxt>
+      <Button type="button" onClick={onClose}>
+        Close
+      </Button>
+    </ModalWrapper>
+  );
+};
 
 export const InfoModal = ({ title, message, onClose }) => {
-  const closeModalHandler = evt => {
-    if (evt.target.nodeName !== 'BUTTON' && evt.target.id !== 'backdrop') {
-      return;
-    }
-
-    onClose(false);
-  };
-
   return (
-    <Backdrop onClick={closeModalHandler} id="backdrop">
-      <ModalWrapper>
-        <ModalTitle>{title}</ModalTitle>
-        <ModalTxt>{message}</ModalTxt>
-        <Button type="button">Close</Button>
-      </ModalWrapper>
-    </Backdrop>
+    <>
+      {ReactDOM.createPortal(
+        <Backdrop onClose={onClose} />,
+        document.getElementById('backdrop')
+      )}
+      {ReactDOM.createPortal(
+        <Modal title={title} message={message} onClose={onClose} />,
+        document.getElementById('modal')
+      )}
+    </>
   );
 };
