@@ -1,34 +1,30 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { ControlsWrapper, Controls, Button } from './AddUserForm.styled';
 
 export const AddUserForm = ({ onAddUser, onCheckFields, onCheckAge }) => {
-  const [inputName, setInputName] = useState('');
-  const [inputAge, setInputAge] = useState('');
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
 
   const submitFormHandler = evt => {
     evt.preventDefault();
 
-    if (inputName.trim().length === 0 || inputAge.trim().length === 0) {
+    const inputUserName = nameInputRef.current.value;
+    const inputUserAge = ageInputRef.current.value;
+
+    if (inputUserName.trim().length === 0 || inputUserAge.trim().length === 0) {
       onCheckFields();
       return;
     }
 
-    if (Number(inputAge) <= 0) {
+    if (Number(inputUserAge) <= 0) {
       onCheckAge();
       return;
     }
 
-    onAddUser(inputName, inputAge);
-    setInputName('');
-    setInputAge('');
-  };
-
-  const nameChangeHandler = evt => {
-    setInputName(evt.target.value);
-  };
-
-  const ageChangeHandler = evt => {
-    setInputAge(evt.target.value);
+    onAddUser(inputUserName, inputUserAge);
+    // NOT RECOMMENDED
+    nameInputRef.current.value = '';
+    ageInputRef.current.value = '';
   };
 
   return (
@@ -36,19 +32,11 @@ export const AddUserForm = ({ onAddUser, onCheckFields, onCheckAge }) => {
       <ControlsWrapper>
         <Controls>
           <label>Name</label>
-          <input
-            type="text"
-            value={inputName}
-            onChange={nameChangeHandler}
-          ></input>
+          <input type="text" ref={nameInputRef}></input>
         </Controls>
         <Controls>
           <label>Age</label>
-          <input
-            type="number"
-            value={inputAge}
-            onChange={ageChangeHandler}
-          ></input>
+          <input type="number" ref={ageInputRef}></input>
         </Controls>
         <Button type="submit">Add new user</Button>
       </ControlsWrapper>
